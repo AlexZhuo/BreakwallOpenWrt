@@ -132,25 +132,7 @@ protocol_param:depends("more", "1")
 
 obfs_param= s:option(Value, "obfs_param", translate("混淆参数"),
 	translate("一般不填"))
-obfs_param:depends("more", "1")
-
-button_update_list = s:option (Button, "_button_update_list", translate("更新GFWList"),translate("点击后请静待30秒,等页面刷新后到【服务】-【域名列表】中查看是否成功")) 
-local gfw_count = luci.sys.exec("grep -c '' /etc/gfwlist/china-banned")
-button_update_list.inputtitle = translate ( "当前规则数目" .. gfw_count .. ",点击更新")
-button_update_list.inputstyle = "apply" 
-button_update_list:depends("more", "1")
-function button_update_list.write (self, section, value)
-	luci.sys.call ( "/etc/update_gfwlist.sh > /dev/null")
-end 
-
-button_update_list = s:option (Button, "_button_update_chinaroute", translate("更新国内路由表"),translate("点击后请静待30秒,如非特殊需要，不用更新该表")) 
-local route_count = luci.sys.exec("grep -c '' /etc/ipset/china")
-button_update_list.inputtitle = translate ( "当前规则数目" .. route_count .. ",点击更新")
-button_update_list.inputstyle = "apply" 
-button_update_list:depends("more", "1")
-function button_update_list.write (self, section, value)
-	luci.sys.call ( "/etc/update_chinaroute.sh > /dev/null")
-end 
+obfs_param:depends("more", "1") 
 
 -- ---------------------------------------------------
 local apply = luci.http.formvalue("cbi.apply")
