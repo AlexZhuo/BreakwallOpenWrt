@@ -1,8 +1,8 @@
 
 config core 'main'
-	option mediaurlbase '/luci-static/bootstrap'
 	option resourcebase '/luci-static/resources'
 	option lang 'zh_cn'
+	option mediaurlbase '/luci-static/darkmatter'
 
 config extern 'flash_keep'
 	option uci '/etc/config/'
@@ -25,4 +25,6 @@ config internal 'ccache'
 
 config internal 'themes'
 	option Bootstrap '/luci-static/bootstrap'
+	option Darkmatter '/luci-static/darkmatter'
+
 

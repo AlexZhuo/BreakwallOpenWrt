@@ -45,7 +45,6 @@ start()
 	local vt_timeout=`uci get shadowsocksr.@shadowsocksr[0].timeout 2>/dev/null`
 	local vt_safe_dns=`uci get shadowsocksr.@shadowsocksr[0].safe_dns 2>/dev/null`
 	local vt_safe_dns_port=`uci get shadowsocksr.@shadowsocksr[0].safe_dns_port 2>/dev/null`
-	local vt_safe_dns_tcp=`uci get shadowsocksr.@shadowsocksr[0].safe_dns_tcp 2>/dev/null`
 	local vt_proxy_mode=`uci get shadowsocksr.@shadowsocksr[0].proxy_mode`
 	local vt_dns_mode=`uci get shadowsocksr.@shadowsocksr[0].dns_mode`
 	# $covered_subnets, $local_addresses are not required
@@ -66,13 +65,13 @@ start()
 		return 1
 	fi
 
-	[ -z "$vt_proxy_mode" ] && vt_proxy_mode=M
+	[ -z "$vt_proxy_mode" ] && vt_proxy_mode=S
+	[ -z "$vt_dns_mode" ] && vt_dns_mode=tcp_gfwlist
 	[ -z "$vt_method" ] && vt_method=table
 	[ -z "$vt_timeout" ] && vt_timeout=60
 	case "$vt_proxy_mode" in
 		M|S|G|GAME)
 			[ -z "$vt_safe_dns" ] && vt_safe_dns="208.67.222.222"
-			[ -z "$vt_safe_dns_tcp" ] && vt_safe_dns_tcp=1
 			;;
 	esac
 	[ -z "$vt_safe_dns_port" ] && vt_safe_dns_port=443
