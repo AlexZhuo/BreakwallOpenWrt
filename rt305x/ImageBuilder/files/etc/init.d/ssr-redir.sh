@@ -39,7 +39,7 @@ start()
 	local vt_password=`uci get shadowsocksr.@shadowsocksr[0].password 2>/dev/null`
 	local vt_method=`uci get shadowsocksr.@shadowsocksr[0].method`
 	local vt_protocol=`uci get shadowsocksr.@shadowsocksr[0].protocol`
-	local vt_obfs=`uci get shadowsocksr.@shadowsocksr[0].obfs_param`
+	local vt_obfs=`uci get shadowsocksr.@shadowsocksr[0].obfs`
 	local vt_obfs_param=`uci get shadowsocksr.@shadowsocksr[0].obfs_param`
 	local vt_protocol_param=`uci get shadowsocksr.@shadowsocksr[0].protocol_param`
 	local vt_timeout=`uci get shadowsocksr.@shadowsocksr[0].timeout 2>/dev/null`
@@ -97,7 +97,7 @@ cat > $SSR_CONF <<EOF
 	"protocol_param": "$vt_protocol_param",
 	"obfs": "$vt_obfs",
 	"obfs_param": "$vt_obfs_param",
-	"fast_open": "false"
+	"fast_open": false
 }
 EOF
 
