@@ -28,3 +28,9 @@ config redsocks2_iptables
 	option blacklist_enabled '0'
 	option whitelist_enabled '0'
 
+config redsocks2_udprelay
+	option local_ip '0.0.0.0'
+	option local_port '12345'
+	option dest_ip '8.8.8.8'
+	option proxy_type 'overtcp'
+
