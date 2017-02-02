@@ -137,6 +137,9 @@ protocol_param:depends("more", "1")
 obfs_param= s:option(Value, "obfs_param", translate("混淆参数"),
 	translate("一般不填"))
 obfs_param:depends("more", "1") 
+adbyby=s:option(Flag,"adbyby",translate("配合Adbyby使用"),translate("未开启Adbyby时请不要勾选此项"))
+adbyby:depends("more", "1") 
+adbyby.rmempty=false
 
 -- ---------------------------------------------------
 local apply = luci.http.formvalue("cbi.apply")

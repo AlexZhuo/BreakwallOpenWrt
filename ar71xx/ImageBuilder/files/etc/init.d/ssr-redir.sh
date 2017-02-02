@@ -47,11 +47,11 @@ start()
 	local vt_safe_dns_port=`uci get shadowsocksr.@shadowsocksr[0].safe_dns_port 2>/dev/null`
 	local vt_proxy_mode=`uci get shadowsocksr.@shadowsocksr[0].proxy_mode`
 	local vt_dns_mode=`uci get shadowsocksr.@shadowsocksr[0].dns_mode`
+	local adbyby=`uci get shadowsocksr.@shadowsocksr[0].adbyby`
 	# $covered_subnets, $local_addresses are not required
 	local covered_subnets=`uci get shadowsocksr.@shadowsocksr[0].covered_subnets 2>/dev/null`
 	local local_addresses=`uci get shadowsocksr.@shadowsocksr[0].local_addresses 2>/dev/null`
 
-	/etc/init.d/pdnsd disable 2>/dev/null
 	
 
 	# -----------------------------------------------------------------
@@ -159,7 +159,10 @@ EOF
 	#	iptables -t nat -A shadowsocksr_pre -s $subnet -p tcp -j REDIRECT --to $SS_REDIR_PORT
 	#done
 	iptables -t nat -A shadowsocksr_pre -p tcp -j REDIRECT --to $SS_REDIR_PORT #alex:添加局域网软路由支持
-	iptables -t nat -I PREROUTING -p tcp -j shadowsocksr_pre
+	iptables -t nat -I prerouting_rule -p tcp -j shadowsocksr_pre
+	if [ "$adbyby" = '1' ];then
+		iptables -t nat -A OUTPUT -p tcp --dport 80 -j shadowsocksr_pre
+	fi
 
 	# -----------------------------------------------------------------
 	mkdir -p /var/etc/dnsmasq-go.d
@@ -266,7 +269,8 @@ stop()
 
 	# -----------------------------------------------------------------
 	if iptables -t nat -F shadowsocksr_pre 2>/dev/null; then
-		while iptables -t nat -D PREROUTING -p tcp -j shadowsocksr_pre 2>/dev/null; do :; done
+		while iptables -t nat -D prerouting_rule -p tcp -j shadowsocksr_pre 2>/dev/null; do :; done
+		iptables -t nat -D OUTPUT -p tcp --dport 80  -j shadowsocksr_pre 2>/dev/null
 		iptables -t nat -X shadowsocksr_pre 2>/dev/null
 	fi
 	#alex:添加游戏模式
