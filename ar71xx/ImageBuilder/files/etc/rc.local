@@ -2,6 +2,8 @@
 # the system init finished. By default this file does nothing.
 opkg install /etc/luci-theme-darkmatter_git-17.005.53085-cca792b-1_all.ipk
 rm -f /etc/luci-theme-darkmatter_git-17.005.53085-cca792b-1_all.ipk
+/etc/init.d/haproxy disable
+/etc/init.d/haproxy stop
 echo exit 0 >/etc/rc.local
 
 exit 0
