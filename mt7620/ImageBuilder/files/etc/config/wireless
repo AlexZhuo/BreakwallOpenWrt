@@ -1,0 +1,32 @@
+
+config wifi-device 'radio0'
+	option type 'mac80211'
+	option channel '36'
+	option hwmode '11a'
+	option path 'pci0000:00/0000:00:00.0/0000:01:00.0'
+	option htmode 'VHT80'
+	option country 'CN'
+
+config wifi-iface 'default_radio0'
+	option device 'radio0'
+	option network 'lan'
+	option mode 'ap'
+	option encryption 'none'
+	option ssid 'PassGFW 5G'
+
+config wifi-device 'radio1'
+	option type 'mac80211'
+	option hwmode '11g'
+	option path 'platform/10180000.wmac'
+	option htmode 'HT20'
+	option country 'CN'
+	option channel '13'
+	option txpower '20'
+
+config wifi-iface 'default_radio1'
+	option device 'radio1'
+	option network 'lan'
+	option mode 'ap'
+	option encryption 'none'
+	option ssid 'PassGFW'
+
