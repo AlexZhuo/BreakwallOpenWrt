@@ -6,6 +6,13 @@ rm -f /etc/luci-theme-darkmatter_git-17.005.53085-cca792b-1_all.ipk
 /etc/init.d/haproxy stop
 /etc/init.d/pdnsd disable
 /etc/init.d/pdnsd stop
-echo exit 0 >/etc/rc.local
+/etc/init.d/vsftpd disable
+/etc/init.d/vsftpd stop
+/etc/init.d/samba disable
+/etc/init.d/samba stop
+
+echo /etc/automount.sh >/etc/rc.local
+
+echo exit 0 >>/etc/rc.local
 
 exit 0
