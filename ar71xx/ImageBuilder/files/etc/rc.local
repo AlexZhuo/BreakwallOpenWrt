@@ -10,7 +10,8 @@ rm -f /etc/luci-theme-darkmatter_git-17.005.53085-cca792b-1_all.ipk
 /etc/init.d/vsftpd stop
 /etc/init.d/samba disable
 /etc/init.d/samba stop
-
+/etc/init.d/bandwidthd disable
+/etc/init.d/bandwidthd stop
 echo /etc/automount.sh >/etc/rc.local
 
 echo exit 0 >>/etc/rc.local

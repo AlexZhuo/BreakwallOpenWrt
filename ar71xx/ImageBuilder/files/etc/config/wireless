@@ -5,7 +5,7 @@ config wifi-device 'radio0'
 	option path 'platform/ar934x_wmac'
 	option htmode 'HT20'
 	option country 'CN'
-	option channel '13'
+	option channel '6'
 	option txpower '20'
 
 config wifi-iface
